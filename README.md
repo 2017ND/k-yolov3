@@ -12,3 +12,4 @@ keras-yolov3训练，加载conv74.74权重，检测图片、视频，保存结�
 8.在Terminal中运行python yolo_video.py --image，等到出现Input image filename输入即可检测图片；
 9.在Terminal中运行python yolo_video.py即可视频，修改yolo.py文件中的detect_video函数参数即可检测不同视频源；设置保存路径，可将检测结果视频为.mp4文件；
 10.运行detec_all.py即可完成批量图片检测；
+11.运行convert.py 可以将.weights文件转换为.h5文件。
