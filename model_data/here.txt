@@ -1,0 +1,4 @@
+存放.h5文件在此文件夹下
+trained_weights_final.h5——202002自己训练的模型文件
+yolo_weights.h5——yolov3训练的官网转换h5文件
+yolo.h5——自己训练的文件

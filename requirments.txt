@@ -1,0 +1,7 @@
+tensorfolw-gpu=1.15.0
+keras=2.2.4
+pillow
+opencv-python
+mkl
+mkl-service
+matplotlib
