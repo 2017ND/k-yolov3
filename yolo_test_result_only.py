@@ -156,7 +156,7 @@ class YOLO(object):
         thickness = (image.size[0] + image.size[1]) // 500
 
         # 保存框检测出的框的个数
-        file.write('find  ' + str(len(out_boxes)) + ' target(s) \n')
+        # file.write('find  ' + str(len(out_boxes)) + ' target(s) \n')
 
         for i, c in reversed(list(enumerate(out_classes))):
             predicted_class = self.class_names[c]
@@ -173,10 +173,15 @@ class YOLO(object):
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
 
-            # 写入检测位置
+            # 写入检测位置 原始检测位置
+            # file.write(
+            #     predicted_class + '  score: ' + str(score) + ' \nlocation: top: ' + str(top) + '、 bottom: ' + str(
+            #         bottom) + '、 left: ' + str(left) + '、 right: ' + str(right) + '\n')
+
+            # 配合计算mAP，改写计算检测位置代码
             file.write(
-                predicted_class + '  score: ' + str(score) + ' \nlocation: top: ' + str(top) + '、 bottom: ' + str(
-                    bottom) + '、 left: ' + str(left) + '、 right: ' + str(right) + '\n')
+                predicted_class + ' ' + str(score) + ' ' + str(left) + ' ' + str(top) + ' '
+                + str(right) + ' ' + str(bottom) + ';')
 
             print(label, (left, top), (right, bottom))
 
@@ -213,7 +218,8 @@ if __name__ == '__main__':
     for filename in os.listdir(path):
         image_path = path + '/' + filename
         portion = os.path.split(image_path)
-        file.write(portion[1] + ' detect_result：\n')
+        # file.write(portion[1] + ' detect_result：\n')
+        file.write(portion[1] + ' ')
         image = Image.open(image_path)
         r_image = yolo.detect_image(image)
         file.write('\n')
@@ -223,7 +229,8 @@ if __name__ == '__main__':
         r_image.save(image_save_path)
 
     time_sum = time.time() - t1
-    file.write('time sum: ' + str(time_sum) + 's')
+    # 总耗费时间
+    # file.write('time sum: ' + str(time_sum) + 's')
     print('time sum:', time_sum)
     file.close()
     yolo.close_session()
